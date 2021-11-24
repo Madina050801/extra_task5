@@ -1,181 +1,115 @@
-/*
-let res = null;
+let color1 = 'white';
+let color2 = 'black';
+let color3;
 
-function firstFunc(type) {
-    if (type === 'click') {
-        res = 'first'
-    }
-    document.getElementById('img1').style.display = 'block';
-    document.getElementById('img2').style.display = 'none';
-    document.getElementById('img3').style.display = 'none';
-}
+color3 = color1; //white
+color1 = color2; //black
+color2 = color3; //white
 
-function secondFunc(type) {
-    if (type === 'click') {
-        res = 'second'
-    }
-    document.getElementById('img1').style.display = 'none';
-    document.getElementById('img2').style.display = 'block';
-    document.getElementById('img3').style.display = 'none';
-}
-
-function thirdFunc(type) {
-    if (type === 'click') {
-        res = 'third'
-    }
-    document.getElementById('img1').style.display = 'none';
-    document.getElementById('img2').style.display = 'none';
-    document.getElementById('img3').style.display = 'block';
-}
-
-function leftOver() {
-    if (res === 'first') {
-        document.getElementById('img1').style.display = 'block';
-        document.getElementById('img2').style.display = 'none';
-        document.getElementById('img3').style.display = 'none';
-    } else if (res === 'second') {
-        document.getElementById('img1').style.display = 'none';
-        document.getElementById('img2').style.display = 'block';
-        document.getElementById('img3').style.display = 'none';
-    } else {
-        document.getElementById('img1').style.display = 'none';
-        document.getElementById('img2').style.display = 'none';
-        document.getElementById('img3').style.display = 'block';
-    }
-
-}
+console.log(color1);
+console.log(color2);
 
 
-defaultFunc();
+//object
+let user = {
+    firstName: 'Ali',
+    lastName: 'Valiyev',
+    age: 25,
+    group: 94,
+    isMarried: false
+};
+user.lastName='Sobirov';
+console.log(user.age);
+console.log(user.lastName);
+console.log(user['group']);
 
-function defaultFunc() {
-    document.getElementById('img1').style.display = 'block';
-    document.getElementById('img2').style.display = 'none';
-    document.getElementById('img3').style.display = 'none';
-}*/
+
+let phone = {
+    model: 'Artel',
+    price: '$90',
+    color: 'black'
+};
+console.log(phone.model);
+console.log(phone['color']);
 
 
-let tasks = [
+//arrays
+let numbers = [45, 56, 12, 89, 32, 74];
+console.log(numbers);
+console.log(numbers.length);
+console.log(numbers[4]);
+
+let colors = ['black', 'red', 'white', 'blue', 'green', 'yellow'];
+colors[3]='orange';
+console.log(colors[3]);
+
+let students = [
     {
-        title: 'Mobile',
-        startDate: '27.07.2021',
-        endDate: '29.07.2021',
-        staff: 'nizom',
-        status: 'pending'
+        firstName: 'Ali',
+        lastName: 'Valiyev',
+        age: 25,
+        group: 94,
     },
+    {
+        firstName: 'Vali',
+        lastName: 'Aliyev',
+        age: 18,
+        group: 91,
+    },
+    {
+        firstName: 'Sobir',
+        lastName: 'Qodirov',
+        age: 22,
+        group: 90,
+    }
 
 ];
 
-function drawList() {
-    document.getElementById('rejectedList').innerHTML = '';
-    document.getElementById('pendingList').innerHTML = '';
-    document.getElementById('doingList').innerHTML = '';
-    document.getElementById('doneList').innerHTML = '';
-    for (let i = 0; i < tasks.length; i++) {
-        if (tasks[i].status === 'pending') {
-            document.getElementById('pendingList').innerHTML +=
-                '<div class="mt-2">' +
-                '<h6>' + 'Task name: ' + tasks[i].title + (tasks[i].rejected === true ? '<span class="badge badge-pill badge-danger">rejected</span>' : '') + '</h6>' +
-                '<h6>' + 'Start date: ' + tasks[i].startDate + '</h6>' +
-                '<h6>' + 'End date: ' + tasks[i].endDate + '</h6>' +
-                '<h6>' + 'Staff: ' + tasks[i].staff + '</h6>' +
-                '<select id="select' + i + '" class="form-control mt-2">' +
-                '<option disabled selected>Select status</option>' +
-                '<option value="doing">doing</option>' +
-                '<option value="done">done</option>' +
-                '</select>' +
-                '<button onclick="edit(' + i + ')" type="button" class="btn btn-warning mt-2">edit</button>' +
-                '<button onclick="deleteTask(' + i + ')" type="button" class="btn btn-danger mt-2 ml-3">delete</button>' +
-                '<hr class="bg-dark">' +
-                '</div>'
-        } else if (tasks[i].status === 'doing') {
-            document.getElementById('doingList').innerHTML +=
-                '<div class="mt-2">' +
-                '<h6>' + 'Task name: ' + tasks[i].title + (tasks[i].rejected === true ? '<span class="badge badge-pill badge-danger">rejected</span>' : '') + '</h6>' +
-                '<h6>' + 'Start date: ' + tasks[i].startDate + '</h6>' +
-                '<h6>' + 'End date: ' + tasks[i].endDate + '</h6>' +
-                '<h6>' + 'Staff: ' + tasks[i].staff + '</h6>' +
-                '<select id="select' + i + '" class="form-control mt-2">' +
-                '<option disabled selected>Select status</option>' +
-                '<option value="pending">pending</option>' +
-                '<option value="done">done</option>' +
-                '</select>' +
-                '<button onclick="edit(' + i + ')" type="button" class="btn btn-warning mt-2">edit</button>' +
-                '<button onclick="deleteTask(' + i + ')" type="button" class="btn btn-danger mt-2 ml-3">delete</button>' +
-                '<hr class="bg-dark">' +
-                '</div>'
-        } else if (tasks[i].status === 'done') {
-            document.getElementById('doneList').innerHTML +=
-                '<div class="mt-2">' +
-                '<h6>' + 'Task name: ' + tasks[i].title + (tasks[i].rejected === true ? '<span class="badge badge-pill badge-danger">rejected</span>' : '') + '</h6>' +
-                '<h6>' + 'Start date: ' + tasks[i].startDate + '</h6>' +
-                '<h6>' + 'End date: ' + tasks[i].endDate + '</h6>' +
-                '<h6>' + 'Staff: ' + tasks[i].staff + '</h6>' +
-                '<button onclick="rejected(' + i + ')" type="button" class="btn btn-danger btn-block">rejected</button>' +
-                '<hr class="bg-dark">' +
-                '</div>'
-        } else {
-            document.getElementById('rejectedList').innerHTML +=
-                '<div class="mt-2">' +
-                '<h6>' + 'Task name: ' + tasks[i].title + '</h6>' +
-                '<h6>' + 'Start date: ' + tasks[i].startDate + '</h6>' +
-                '<h6>' + 'End date: ' + tasks[i].endDate + '</h6>' +
-                '<h6>' + 'Staff: ' + tasks[i].staff + '</h6>' +
-                '<select id="select' + i + '" class="form-control mt-2">' +
-                '<option disabled selected>Select status</option>' +
-                '<option value="pending">pending</option>' +
-                '<option value="doing">doing</option>' +
-                '</select>' +
-                '<button onclick="edit(' + i + ')" type="button" class="btn btn-warning mt-2">edit</button>' +
-                '<hr class="bg-dark">' +
-                '</div>'
-        }
-    }
+function getStudentList(){
+    document.getElementById('firstName').innerHTML=students[1].firstName;
+    document.getElementById('lastName').innerHTML=students[1].lastName;
+    document.getElementById('age').innerHTML=students[1].age;
+    document.getElementById('group').innerHTML=students[1].group;
+}
+getStudentList();
+
+students[1].firstName='Qodir';
+document.getElementById('userName').innerHTML=students[1].firstName
+console.log(students);
+console.log(students[1].firstName);
+console.log(students[2].group);
+
+//function
+
+function greet(firstName) {
+    console.log('hello ' + firstName)
 }
 
-function edit(index) {
-    if (document.getElementById('select' + index).value !== "Select status") {
-        tasks[index].status = document.getElementById('select' + index).value;
-        drawList();
-    }
+greet('Azamat');
+
+function yigindi(a, b) {
+    console.log(a + b)
 }
 
+yigindi(45, 55);
 
-function deleteTask(index) {
-    tasks.splice(index, 1);
-    drawList();
+function square(x) {
+    return x * x
 }
 
-function rejected(index) {
-    tasks[index].status = "rejected";
-    tasks[index].rejected = true;
-    console.log(tasks);
-    drawList()
-}
+console.log(square(5));
 
-function addTask() {
-    let title = document.forms['addForm']['title'].value;
-    let startDate = document.forms['addForm']['startDate'].value;
-    let endDate = document.forms['addForm']['endDate'].value;
-    let staff = document.forms['addForm']['staff'].value;
-    let status = document.forms['addForm']['status'].value;
+console.log(5==='5'); //false
 
-    if (title.trim().length > 0 && startDate.trim().length > 0 && endDate.trim().length > 0 &&
-        staff !== 'Select staff' && status !== 'Select status') {
-        let newTask = {
-            title,
-            startDate,
-            endDate,
-            status,
-            staff,
-            rejected: false
-        };
-        tasks.push(newTask);
-        drawList();
-        document.forms['addForm'].reset();
-    } else {
-        alert("Formani to'ldiring")
-    }
-}
+const pi=3.14;
+console.log(pi);
 
-drawList();
+console.log(6>6); //false
+
+let hour=6;
+let result=hour>8 ? 'open' : 'close';
+console.log(result);
+
+let ball=60;
+let natija=ball>=60 ? "imtihondan o'tdingiz" : "Yiqildingiz";
+console.log(natija);
